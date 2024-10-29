@@ -3,9 +3,43 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
+  <link rel="stylesheet" href="style.css">
+  <title>Flammouss</title>
 </head>
 <body>
-  
+    <div class="content">
+      <img src="images/fleur1.png" alt="" class="fleur1">
+      <span class="circle">
+        <h1>ON SE PARLE DEPUIS</h1>
+        <p id="days-counter">0 JOURS</p>
+      </span>
+      <img src="images/mignon.png" alt="" class="mignon">
+      <img src="images/bonhomme.png" alt="" class="bonhomme">
+    </div>
+
+<script>
+      function getDaysDifference(startDate, endDate) {
+        const oneDay = 24 * 60 * 60 * 1000;
+        const diffInMs = endDate - startDate;
+        return Math.floor(diffInMs / oneDay);
+      }
+
+      const targetDays = 515;
+      const today = new Date();
+      const startDate = new Date(today - targetDays * 24 * 60 * 60 * 1000);
+
+      localStorage.setItem('startDate', startDate.toISOString());
+
+      const daysElapsed = getDaysDifference(startDate, today);
+
+      document.getElementById('days-counter').textContent = `${daysElapsed} JOURS`;
+
+      setInterval(() => {
+        const currentDate = new Date();
+        const updatedDaysElapsed = getDaysDifference(startDate, currentDate);
+        document.getElementById('days-counter').textContent = `${updatedDaysElapsed} JOURS`;
+      }, 24 * 60 * 60 * 1000); 
+
+    </script>
 </body>
 </html>
